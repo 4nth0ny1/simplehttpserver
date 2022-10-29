@@ -1,0 +1,40 @@
+package com.anthony.httpserver;
+
+import java.io.IOException;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.anthony.httpserver.config.Configuration;
+import com.anthony.httpserver.config.ConfigurationManager;
+import com.anthony.httpserver.core.ServerListenerThread;
+
+/*
+ *  Driver Class for Http Server
+ */
+
+public class HttpServer {
+	
+	private final static Logger LOGGER = LoggerFactory.getLogger(HttpServer.class);
+	
+	public static void main(String[] args) {
+		LOGGER.info("Starting server ...");
+		
+		ConfigurationManager.getInstance().loadConfigurationFile("src/main/resources/http.json");
+		Configuration conf = ConfigurationManager.getInstance().getCurrentConfiguration();
+		
+		LOGGER.info("Using Port: " + conf.getPort());
+		LOGGER.info("Using WebRoot: " + conf.getWebroot());
+		
+		ServerListenerThread serverListenerThread;
+		try {
+			serverListenerThread = new ServerListenerThread(conf.getPort(), conf.getWebroot());
+			serverListenerThread.start();
+		} catch (IOException e) {
+			e.printStackTrace();
+			// TODO handle later
+		}
+		
+	}
+}
