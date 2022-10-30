@@ -39,6 +39,8 @@ public class ServerListenerThread extends Thread{
 					serverSocket.close();
 				} catch (IOException e) {}             
 			}
+			
+			
 		} 
 		
 		
