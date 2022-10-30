@@ -26,6 +26,9 @@ public class ConfigurationManager {
 	/**
 	 * used to load a configuration file by the path provided 
 	 * @throws IOException 
+	 * 
+	 * 
+	 * 
 	 */
 
 	@SuppressWarnings("resource")
